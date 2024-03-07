@@ -4,6 +4,7 @@ const app=express();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const cors = require('cors'); // Import the cors middleware
+const path = require('path'); // Add this line
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,6 +14,7 @@ app.use('/uploads', express.static('uploads'));
 
 const productsRouter=require('./products/prodcutsRoutes');
 const homeRoute=require('./home/homeRotes');
+app.use('/images', express.static(path.join(__dirname, 'uploads', 'category')));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

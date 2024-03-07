@@ -4,8 +4,6 @@ const Category = require('./categoryModel');
 
 
 
-
-
 const ProductForm = async (req, res) => {
     const categories = await Category.find({}, 'categoryName'); // Assuming your Category model has a 'categoryName' field
 
