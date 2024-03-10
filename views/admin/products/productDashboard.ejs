@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Product Dashborad</h1>
+
+    <% if (productsArr.length > 0) { %>
+        <ul>
+            <% productsArr.forEach(product => { %>
+                <li>
+                    <strong>Product Name:</strong> <%= product.productName %><br>
+                    <strong>Product Price:</strong> $<%= product.productPrice.toFixed(2) %><br>
+                    
+                    <!-- Main Image -->
+                    <img src="/uploads/<%= product.primaryImage %>" alt="<%= product.productName %> Image" width="100">
+                    
+                
+                    
+                    <br>
+                    <a href="/products/detail/<%= product._id %>">View Details</a>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No products available.</p>
+    <% } %>
+</body>
+</html>
