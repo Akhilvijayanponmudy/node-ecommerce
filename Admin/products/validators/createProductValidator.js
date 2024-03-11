@@ -1,9 +1,10 @@
 const productValidator = (req, res, next) => {
-    const { productName, productPrice } = req.body;
+    const { productName, productCurrentPrice,productActualPrice,category } = req.body;
     // const productImage = req.file.filename;
 
     // if (!productName || !productPrice || !productImage) {
-    if (!productName || !productPrice) {
+
+    if (!productName || !productCurrentPrice || !productActualPrice  || !category) {
         res.json({
             successful: false,
             error: {

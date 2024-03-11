@@ -5,8 +5,16 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    productPrice: {
+    productActualPrice: {
         type: Number,
+        required: true,
+    },
+    productCurrentPrice: {
+        type: Number,
+        required: true,
+    },
+    productDescription: {
+        type: String, // Assuming the primary image is a single string path
         required: true,
     },
     primaryImage: {
