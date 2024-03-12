@@ -4,7 +4,8 @@ const Category = require('../../models/categoryModel');
 
 const productList = async (req, res) => {
     const allProducts = await Product.find({});
-    res.render('user/products/productList', { products: allProducts });
+    // res.render('user/products/productList', { products: allProducts });
+    res.json( { products: allProducts });
 }
 
 const productDetail = async (req, res) => {
