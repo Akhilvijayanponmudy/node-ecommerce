@@ -16,7 +16,9 @@ const productDetail = async (req, res) => {
             res.status(404).send('Product not found');
             return;
         }
-        res.render('user/products/productDetail', { product });
+        console.log(product);
+        res.json({productDetail:product });
+        // res.render('user/products/productDetail', { product });
     } catch (error) {
         console.error(error);
         res.status(500).json({ successful: false, error: 'Internal server error' });
