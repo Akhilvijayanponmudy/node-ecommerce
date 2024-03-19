@@ -6,6 +6,10 @@ const multer = require('multer');
 const cors = require('cors'); // Import the cors middleware
 const path = require('path'); // Add this line
 
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
