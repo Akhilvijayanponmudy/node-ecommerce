@@ -13,12 +13,10 @@
             <% productsArr.forEach(product => { %>
                 <li>
                     <strong>Product Name:</strong> <%= product.productName %><br>
-                    <strong>Product Price:</strong> $<%= product.productPrice.toFixed(2) %><br>
+                    <strong>Product Price:</strong> $<%= product.productPrice %><br>
                     
                     <!-- Main Image -->
                     <img src="/uploads/<%= product.primaryImage %>" alt="<%= product.productName %> Image" width="100">
-                    
-                
                     
                     <br>
                     <a href="/products/detail/<%= product._id %>">View Details</a>

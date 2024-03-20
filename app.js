@@ -16,21 +16,19 @@ app.set('view engine', 'ejs');
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
 const mainRoutes = require('./routes');
-// const productsAdminRouter=require('./products-admin/prodcutsRoutes');
-// const homeRoute=require('./home/homeRotes');
+
 app.use('/images', express.static(path.join(__dirname, 'uploads', 'category')));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-      cb(null, 'uploads/'); // Set the destination folder for uploaded files
+      cb(null, 'uploads/'); 
   },
   filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname); // Set the filename to avoid conflicts
+      cb(null, Date.now() + '-' + file.originalname);
   },
 });
 
-// app.use('/',homeRoute);
-// app.use('/admin/products',productsAdminRouter);
+
 app.use('/', mainRoutes);
 
 module.exports=app;

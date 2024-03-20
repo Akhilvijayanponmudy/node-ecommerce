@@ -4,10 +4,8 @@ const User = require('../models/userModel'); // Adjust the path as needed
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/e-commerce', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect('mongodb://127.0.0.1:27017/e-commerce', {
+mongoose.connect('mongodb+srv://akhilv:Vth9V8RiALZKLOYq@akhilvijayan.79nyak4.mongodb.net/');
 
 // Dummy user data
 const userData = [
