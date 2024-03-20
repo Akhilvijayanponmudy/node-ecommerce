@@ -1,12 +1,11 @@
 // categorySeeder.js
 const mongoose = require('mongoose');
-const Category = require('../products/categoryModel');
+const Category = require('../models/categoryModel');
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/e-commerce', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect('mongodb://127.0.0.1:27017/e-commerce', {
+  mongoose.connect('mongodb+srv://akhilv:Vth9V8RiALZKLOYq@akhilvijayan.79nyak4.mongodb.net/');
+
 
 // Sample data to seed the Category collection
 const categories = [
