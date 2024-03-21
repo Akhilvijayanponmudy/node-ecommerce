@@ -1,5 +1,7 @@
 const Cart = require('../../models/cartModel');
 const Product = require('../../models/productModel')
+const { ObjectId } = require('mongodb');
+
 const cart = async (req, res) => {
     if (!req.user.userId) {
         return res.status(500).json({ message: 'user id not retreved through jwd' });
@@ -75,4 +77,31 @@ const addToCart = async (req, res) => {
         console.log(error);
     }
 }
-module.exports = { cart, addToCart }
+
+
+const removeFromCart = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user.userId;
+
+        // let userCart = await Cart.findOne({ userId });
+        // const targetProductId = ObjectId.createFromTime(id);
+        // const updatedCart = userCart.items.filter(item => item.id.toString() !== targetProductId.toString());
+        // userCart.items = updatedCart;
+        // console.log(updatedCart);
+        // await userCart.save();
+
+
+        const updatedCart = await Cart.findOneAndUpdate(
+            { userId },
+            { $pull: { items: { productId: id } } },
+            { new: true } // Return the updated document
+        );
+        console.log(updatedCart);
+        res.json({ 'status': true, 'message': "done" });
+    } catch (error) {
+        res.json({ 'status': false, 'error': error });
+    }
+}
+
+module.exports = { cart, addToCart, removeFromCart }

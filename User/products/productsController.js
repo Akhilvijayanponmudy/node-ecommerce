@@ -16,7 +16,6 @@ const productDetail = async (req, res) => {
             res.status(404).send('Product not found');
             return;
         }
-        console.log(product);
         res.json({productDetail:product });
         // res.render('user/products/productDetail', { product });
     } catch (error) {
@@ -28,7 +27,7 @@ const productDetail = async (req, res) => {
 
 const categoryList = async (req, res) => {
     const allCat = await Category.find();
-    console.log(allCat);
+    // console.log(allCat);
     res.render('user/products/categoryList', { catArr: allCat });
 }
 
