@@ -5,7 +5,7 @@ const { accountView, addressView, addAddress } = require('./accountController')
 
 
 router.get('/', accountView);
-router.get('/address', addressView);
+router.get('/address',verifyJWT, addressView);
 router.post('/address/add', verifyJWT, addAddress);
 
 
