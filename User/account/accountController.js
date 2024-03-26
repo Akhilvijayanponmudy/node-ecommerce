@@ -3,8 +3,14 @@ const Address = require('../../models/addressModel');
 const accountView = (req, res) => {
     res.json({ 'message': 'account page' })
 }
-const addressView = (req, res) => {
-    res.json({ 'message': 'Address page' })
+const addressView = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const addressSchema = await Address.findOne({ userId });
+        res.json({ successful: true, addressArr: addressSchema })
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const addAddress = async (req, res) => {
