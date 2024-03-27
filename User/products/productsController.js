@@ -5,7 +5,7 @@ const Category = require('../../models/categoryModel');
 const productList = async (req, res) => {
     const allProducts = await Product.find({});
     // res.render('user/products/productList', { products: allProducts });
-    res.json( { products: allProducts });
+    res.json({ products: allProducts });
 }
 
 const productDetail = async (req, res) => {
@@ -16,7 +16,7 @@ const productDetail = async (req, res) => {
             res.status(404).send('Product not found');
             return;
         }
-        res.json({productDetail:product });
+        res.json({ productDetail: product });
         // res.render('user/products/productDetail', { product });
     } catch (error) {
         console.error(error);
@@ -31,7 +31,7 @@ const categoryList = async (req, res) => {
     res.render('user/products/categoryList', { catArr: allCat });
 }
 
-const categoryProducts= async(req,res)=>{
+const categoryProducts = async (req, res) => {
     res.render('user/products/categoryProducts')
 }
 

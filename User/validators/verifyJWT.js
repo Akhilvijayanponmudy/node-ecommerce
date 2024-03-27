@@ -30,7 +30,6 @@ const verifyJWT = (req, res, next) => {
             res.status(299).json({ 'status': false, message: 'Unauthorized' });
         }
     }
-
 };
 
 module.exports = verifyJWT;
