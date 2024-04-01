@@ -16,6 +16,7 @@ const verifyJWT = (req, res, next) => {
             res.status(299).json({ 'status': false, message: 'Unauthorized' });
         }
     } else if (req.method == 'GET') {
+
         const authHeader = req.headers.authorization;
         const token = authHeader && authHeader.split(' ')[1];
         if (!token) {
