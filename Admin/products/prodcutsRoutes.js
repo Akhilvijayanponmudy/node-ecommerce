@@ -7,14 +7,11 @@ const upload = multer({ dest: 'uploads/' });
 
 
 router.get('/',productDashboard);
-
-
 router.get('/add-product', ProductForm);
 router.post('/add-product', upload.fields([{ name: 'primaryImage', maxCount: 1 }, { name: 'imageGroup', maxCount: 5 }]), productValidator, createProduct);
 
 // Category Routes
-router.get('/add-category', categoryForm);  // Display the category form
-router.post('/add-category', addCategory);  // Handle category creation
-
+router.get('/add-category', categoryForm); 
+router.post('/add-category', addCategory); 
 
 module.exports = router
