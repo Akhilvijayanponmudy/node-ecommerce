@@ -10,10 +10,13 @@ dotenv.config({ path: './.env' });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.set('view engine', 'ejs');
+app.use('/uploads', express.static('uploads'));
+
 app.use(express.static('public'));
 app.use(cors());
-app.use('/uploads', express.static('uploads'));
+
 
 const mainRoutes = require('./routes');
 
