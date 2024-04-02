@@ -93,12 +93,12 @@ const paymentSuccess = async (req, res) => {
 
     if (userId) {
         const { paymentId, amount, address, state } = req.body;
-        const shippingAddress = await Address.findOne({ userId });
+        const addressArray = await Address.findOne({ userId });
 
         console.log(address);
 
 
-        const shippingAddress = shippingAddress.items.find(item => item._id.toString() === address);
+        const shippingAddress = addressArray.items.find(item => item._id.toString() === address);
         // console.log(actualAddress);
 
         try {
