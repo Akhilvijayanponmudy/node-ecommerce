@@ -72,7 +72,7 @@ const addToCart = async (req, res) => {
             cart.items.push({ productId, quantity });
         }
         await cart.save();
-        res.json({ status: true, message: 'Item added to cart' });
+        res.json({ status: true, message: 'Item  added to cart' });
     } catch (error) {
         console.log(error);
     }
@@ -90,7 +90,6 @@ const removeFromCart = async (req, res) => {
         // userCart.items = updatedCart;
         // console.log(updatedCart);
         // await userCart.save();
-
 
         const updatedCart = await Cart.findOneAndUpdate(
             { userId },
