@@ -96,7 +96,7 @@ const removeFromCart = async (req, res) => {
             { $pull: { items: { productId: id } } },
             { new: true } // Return the updated document
         );
-        console.log(updatedCart);
+        // console.log(updatedCart);
         res.json({ 'status': true, 'message': "done" });
     } catch (error) {
         res.json({ 'status': false, 'error': error });

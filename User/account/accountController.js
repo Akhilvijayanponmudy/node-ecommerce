@@ -7,9 +7,10 @@ const addressView = async (req, res) => {
     try {
         const userId = req.user.userId;
         const addressSchema = await Address.findOne({ userId });
-        res.json({ successful: true, addressArr: addressSchema })
+        res.status(201).json({ successful: true, addressArr: addressSchema });
     } catch (error) {
-        console.log(error);
+        res.status(299).json({ successful: false, message: error });
+
     }
 }
 
