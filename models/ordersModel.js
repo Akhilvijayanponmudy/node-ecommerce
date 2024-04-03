@@ -8,6 +8,14 @@ const orderSchema = new mongoose.Schema({
     },
     items: [
         {
+            date: {
+                type: Date,
+                default: Date.now
+            },
+            paymentId: {
+                type: String,
+                required: true
+            },
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Product',

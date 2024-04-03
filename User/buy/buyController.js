@@ -43,7 +43,7 @@ const buyView = async (req, res) => {
 
                 }
             }
-            console.log(productsArray);
+
             res.status(201).json({ successful: true, 'product': productsArray, 'totalPrice': totalCost });
 
         } catch (error) {
@@ -83,44 +83,70 @@ const paymentCalculation = async (req, res) => {
         res.json({ 'message': 'success', 'price': productArr.productCurrentPrice })
     } else {
         res.json({ 'status': 'false', 'message': 'no product found' });
-
     }
-
 }
 
 const paymentSuccess = async (req, res) => {
     const userId = req.user.userId;
-
     if (userId) {
-        const { paymentId, amount, address, state } = req.body;
+        const { paymentId, productAmount, address, state } = req.body;
         const addressArray = await Address.findOne({ userId });
-
-        console.log(address);
-
-
         const shippingAddress = addressArray.items.find(item => item._id.toString() === address);
-        // console.log(actualAddress);
+        if (state != 'cart') {
 
-        try {
-            let oredrschema = await OrderModel.findOne({ userId });
-            if (!oredrschema) {
-                oredrschema = new OrderModel({ userId })
+            try {
+                let oredrschema = await OrderModel.findOne({ userId });
+                if (!oredrschema) {
+                    oredrschema = new OrderModel({ userId })
+                }
+                const productQandity = 1;
+                const productId = state;
+                await oredrschema.items.push({ paymentId, productId, productQandity, productAmount, shippingAddress });
+                await oredrschema.save();
+                res.json({ status: true, message: 'Item added to orders' });
+            } catch (error) {
+                console.log(error);
+                res.json({ status: false, message: 'Error occurs' });
             }
-            const productId = '65fa6bda2e331f2a0d8cbace';
-            const productQandity = 1;
-            const productAmount = 500;
-            const address = 'akhil test address';
+
+        } else if (state === 'cart') {
+
+            const addressArray = await Address.findOne({ userId });
+            const cartArr = await Cart.findOne({ userId });
+            const dataArr = cartArr.items;
+            try {
+                let oredrschema = await OrderModel.findOne({ userId });
+                if (!oredrschema) {
+                    oredrschema = new OrderModel({ userId })
+                }
+
+                for (let i = 0; i < dataArr.length; i++) {
+                    const item = dataArr[i];
+                    const productQandity = item.quantity;
+                    const productId = item.productId.toString();
+                    const cartProductArr = await Product.findById(productId);
+                    const productAmount = cartProductArr.productCurrentPrice;
+                    await oredrschema.items.push({ paymentId, productId, productQandity, productAmount, shippingAddress });
+
+                }
+                await oredrschema.save();
 
 
-            await oredrschema.items.push({ productId, productQandity, productAmount, shippingAddress });
-            await oredrschema.save();
-            res.json({ status: true, message: 'Item added to orders' });
+                // const shippingAddress = addressArray.items.find(item => item._id.toString() === address);
+                res.json({ status: true, message: 'Item added to orders' });
 
-        } catch (error) {
-            console.log(error);
-            res.json({ status: false, message: 'Error occurs' });
+
+
+            } catch (error) {
+                console.log(error);
+                res.json({ status: false, message: 'Error occurs' });
+
+            }
 
         }
+
+
+
     }
 }
 
