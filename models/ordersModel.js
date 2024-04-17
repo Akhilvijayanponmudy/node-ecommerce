@@ -42,6 +42,11 @@ const orderSchema = new mongoose.Schema({
                 type: String,
                 required: true,
                 default: 'Orderd'
+            },
+            paymentMethod:{
+                type:String,
+                required:true,
+
             }
         }
     ],
