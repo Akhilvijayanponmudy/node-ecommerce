@@ -89,9 +89,10 @@ const paymentCalculation = async (req, res) => {
 const paymentSuccess = async (req, res) => {
     const userId = req.user.userId;
     if (userId) {
-        const { paymentId, productAmount, address, state } = req.body;
+        const { paymentId, productAmount, address, state,paymentMethod } = req.body;
         const addressArray = await Address.findOne({ userId });
         const shippingAddress = addressArray.items.find(item => item._id.toString() === address);
+        console.log(paymentMethod);
         if (state != 'cart') {
 
             try {
@@ -101,7 +102,7 @@ const paymentSuccess = async (req, res) => {
                 }
                 const productQandity = 1;
                 const productId = state;
-                await oredrschema.items.push({ paymentId, productId, productQandity, productAmount, shippingAddress });
+                await oredrschema.items.push({ paymentId, productId, productQandity, productAmount, shippingAddress ,paymentMethod});
                 await oredrschema.save();
                 res.json({ status: true, message: 'Item added to orders' });
             } catch (error) {
@@ -126,7 +127,7 @@ const paymentSuccess = async (req, res) => {
                     const productId = item.productId.toString();
                     const cartProductArr = await Product.findById(productId);
                     const productAmount = cartProductArr.productCurrentPrice;
-                    await oredrschema.items.push({ paymentId, productId, productQandity, productAmount, shippingAddress });
+                    await oredrschema.items.push({ paymentId, productId, productQandity, productAmount, shippingAddress,paymentMethod });
 
                 }
                 await oredrschema.save();
