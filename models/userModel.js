@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs'); // For password hashing
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, 'Username is required'],
-    unique: true,
   },
   email: {
     type: String,
@@ -20,12 +19,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Password is required'],
     minlength: 6,
-    select: true, // Don't include password in user object retrieval
+    select: true,
   },
-  // Add other user fields as needed (e.g., name, bio, etc.)
-}, { timestamps: true }); // Include timestamps for created/updated at
+}, { timestamps: true });
 
-// Hash password before saving the user
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
