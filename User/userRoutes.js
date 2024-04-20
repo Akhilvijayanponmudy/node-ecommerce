@@ -8,6 +8,8 @@ const cart = require('./cart/cartRoutes');
 const buy = require('./buy/buyRoutes');
 const account = require('./account/accountRoutes');
 const orders =require('./orders/orderRoutes');
+const register =require('./register/rejisterRoutes');
+
 
 router.use('/', home);
 router.use('/products', products);
@@ -16,5 +18,6 @@ router.use('/cart', cart);
 router.use('/buy', buy);
 router.use('/account', account);
 router.use('/orders', orders);
+router.use('/register', register);
 
 module.exports = router;
