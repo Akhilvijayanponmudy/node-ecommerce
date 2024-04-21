@@ -7,6 +7,9 @@ const ordersList = async (req, res) => {
         return res.status(500).json({ message: 'user id not retreved through jwd' });
     }
     const userId = req.user.userId;
+    if(userId){
+
+    
     try {
         const orders = await OrderModel.find({ userId: userId, 'items.shippingStatus': 'Orderd' });
         const ordersArr = orders[0].items;
@@ -36,5 +39,9 @@ const ordersList = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
+}else{
+    res.json({ 'status': false, 'message': "user not fount"});
+
+}
 }
 module.exports = { ordersList }
