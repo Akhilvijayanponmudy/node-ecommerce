@@ -15,13 +15,20 @@ const userRegistration = async (req, res) => {
         if (existingUser) {
             return res.status(277).json({ successful: false, message: 'Email address already in use' });
         }
+        // const salt = await bcrypt.genSalt(10);
+        // const hashedPassword = await bcrypt.hash(password, salt);
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const newUser = new User({ username: fullname, email: email, password: hashedPassword });
-        const savedUser = await newUser.save();
+        // const trimmedPassword=password.trim();
+        // const hashedPassword = await bcrypt.hash(trimmedPassword, 10);
 
-        res.status(201).json({ successful: true, message: 'User Created Successfully', user: savedUser });
+       
+        const newUser = new User({ username: fullname, email: email, password: hashedPassword });
+        await newUser.save();
+
+        res.status(201).json({ successful: true, message: 'User Created Successfully'});
     } catch (error) {
         console.error(error);
         if (error.code === 11000 && error.keyPattern.username) {

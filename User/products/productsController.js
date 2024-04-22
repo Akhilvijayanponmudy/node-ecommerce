@@ -32,7 +32,17 @@ const categoryList = async (req, res) => {
 }
 
 const categoryProducts = async (req, res) => {
-    res.render('user/products/categoryProducts')
+
+    const categoryId = req.params.catID;
+    console.log(categoryId);
+    if (categoryId) {
+        const productsArr = await Product.find({ category: categoryId });
+        res.json({ products: productsArr });
+
+    } else {
+        res.json({ message: 'no products fount' })
+
+    }
 }
 
 module.exports = {
