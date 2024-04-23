@@ -83,18 +83,11 @@ const removeFromCart = async (req, res) => {
     try {
         const { id } = req.params;
         const userId = req.user.userId;
-
-        // let userCart = await Cart.findOne({ userId });
-        // const targetProductId = ObjectId.createFromTime(id);
-        // const updatedCart = userCart.items.filter(item => item.id.toString() !== targetProductId.toString());
-        // userCart.items = updatedCart;
-        // console.log(updatedCart);
-        // await userCart.save();
-
+        
         const updatedCart = await Cart.findOneAndUpdate(
             { userId },
             { $pull: { items: { productId: id } } },
-            { new: true } // Return the updated document
+            { new: true } 
         );
         // console.log(updatedCart);
         res.json({ 'status': true, 'message': "done" });
