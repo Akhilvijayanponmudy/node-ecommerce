@@ -52,19 +52,19 @@ const orderCancel = async (req, res) => {
 
     try {
         const updatedOrder = await OrderModel.findOneAndUpdate(
-          { userId: userId },
-          { $pull: { 'items': { _id: orderId } } },
-          { new: true }
+            { userId: userId },
+            { $pull: { 'items': { _id: orderId } } },
+            { new: true }
         );
-        
+
         if (updatedOrder) {
-          console.log("Item removed successfully:");
+            console.log("Item removed successfully:");
         } else {
-          console.log("No orders found for the user ID.");
+            console.log("No orders found for the user ID.");
         }
-      } catch (error) {
+    } catch (error) {
         console.error("Error:", error);
-      }
+    }
     res.json({ 'status': true, 'message': "done" });
 
 }

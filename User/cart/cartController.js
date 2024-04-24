@@ -83,14 +83,14 @@ const removeFromCart = async (req, res) => {
     try {
         const { id } = req.params;
         const userId = req.user.userId;
-        
+
         const updatedCart = await Cart.findOneAndUpdate(
             { userId },
             { $pull: { items: { productId: id } } },
-            { new: true } 
+            { new: true }
         );
         // console.log(updatedCart);
-        res.json({ 'status': true, 'message': "done" });
+        res.json({ status: true, message: "done" });
     } catch (error) {
         res.json({ 'status': false, 'error': error });
     }
