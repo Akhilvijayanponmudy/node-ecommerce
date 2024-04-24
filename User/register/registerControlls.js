@@ -19,7 +19,8 @@ const userRegistration = async (req, res) => {
         // const hashedPassword = await bcrypt.hash(password, salt);
 
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const hashedPasswordNotrimmed = await bcrypt.hash(password, salt);
+        const hashedPassword = hashedPasswordNotrimmed.trim();
 
         // const trimmedPassword=password.trim();
         // const hashedPassword = await bcrypt.hash(trimmedPassword, 10);
