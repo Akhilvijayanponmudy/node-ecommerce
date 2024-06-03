@@ -10,11 +10,11 @@ const Category = require('../models/categoryModel');
 // Sample data to seed the Category collection
 const categories = [
   {
-    categoryName: 'Toys',
+    categoryName: 'Mobiles',
     primaryImage: 'toys-category-image.png',
   },
   {
-    categoryName: 'Shoes',
+    categoryName: 'Speakers',
     primaryImage: 'shoes.png',
   },
   {

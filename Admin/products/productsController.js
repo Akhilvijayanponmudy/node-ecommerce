@@ -2,10 +2,10 @@ const Product = require('../../models/productModel');
 const Category = require('../../models/categoryModel');
 
 
-const productDashboard=async(req,res)=>{
+const productDashboard = async (req, res) => {
     const allProducts = await Product.find({});
 
-    res.render('admin/products/productDashboard',{productsArr:allProducts})
+    res.render('admin/products/productDashboard', { productsArr: allProducts })
 }
 
 const ProductForm = async (req, res) => {
@@ -16,7 +16,7 @@ const ProductForm = async (req, res) => {
 
 const createProduct = async (req, res) => {
     try {
-        const { productName, productCurrentPrice, category,productActualPrice,productDescription } = req.body;
+        const { productName, productBrand, productCurrentPrice, category, productActualPrice, productDescription } = req.body;
         // Check if primary image and image group were uploaded
         if (!req.files || !req.files.primaryImage || !req.files.imageGroup || req.files.imageGroup.length === 0) {
             return res.status(400).json({ successful: false, error: 'Primary image and image group are required' });
@@ -26,7 +26,7 @@ const createProduct = async (req, res) => {
         const imageGroup = req.files.imageGroup.map(file => file.filename);
 
         // Save to MongoDB
-        const newProduct = new Product({ productName, productCurrentPrice,productActualPrice,productDescription, primaryImage, imageGroup, category });
+        const newProduct = new Product({ productName, productBrand, productCurrentPrice, productActualPrice, productDescription, primaryImage, imageGroup, category });
         await newProduct.save();
         // Send success response
         res.status(201).json({ successful: true, message: 'Product created successfully' });

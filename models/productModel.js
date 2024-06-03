@@ -5,6 +5,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    productBrand: {
+        type: String,
+        required: true,
+    },
     productActualPrice: {
         type: Number,
         required: true,
@@ -14,16 +18,15 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     productDescription: {
-        type: String, // Assuming the primary image is a single string path
-        required: true,
+        type: String,
     },
     primaryImage: {
-        type: String, // Assuming the primary image is a single string path
+        type: String,
         required: true,
     },
     imageGroup: {
-        type: [String], // An array of strings for additional images
-        default: [],    // Default to an empty array
+        type: [String],
+        default: [],
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
