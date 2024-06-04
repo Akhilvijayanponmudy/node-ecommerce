@@ -4,7 +4,6 @@ const Category = require('../../models/categoryModel');
 
 const productList = async (req, res) => {
     const allProducts = await Product.find({});
-    // res.render('user/products/productList', { products: allProducts });
     res.json({ products: allProducts });
 }
 
@@ -17,7 +16,6 @@ const productDetail = async (req, res) => {
             return;
         }
         res.json({ productDetail: product });
-        // res.render('user/products/productDetail', { product });
     } catch (error) {
         console.error(error);
         res.status(500).json({ successful: false, error: 'Internal server error' });
@@ -27,17 +25,30 @@ const productDetail = async (req, res) => {
 
 const categoryList = async (req, res) => {
     const allCat = await Category.find();
-    // console.log(allCat);
     res.render('user/products/categoryList', { catArr: allCat });
 }
 
 const categoryProducts = async (req, res) => {
 
     const categoryId = req.params.catID;
-    console.log(categoryId);
     if (categoryId) {
-        const productsArr = await Product.find({ category: categoryId });
-        res.json({ products: productsArr });
+        const ProductArr = await Product.find({ category: categoryId }).limit(12);
+        const baseImageUrl = 'http://localhost:5000/uploads';
+
+        // const ProductArr = await Product.find({}).sort({ createdAt: -1 }).limit(12);
+
+        const productsArray = ProductArr.map(product => ({
+            id: product._id,
+            productName: product.productName,
+            productBrand: product.productBrand,
+            productActualPrice: product.productActualPrice,
+            productCurrentPrice: product.productCurrentPrice,
+            primaryImage: `${baseImageUrl}/${product.primaryImage}`
+        }));
+
+
+
+        res.status(201).json({ successful: true, message: 'API Successs', productArr: productsArray });
 
     } else {
         res.json({ message: 'no products fount' })
