@@ -29,7 +29,7 @@ const loginValidate = async (req, res) => {
         }
 
         const payload = { userId: user._id };
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '3600s' });
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '360000s' });
 
         res.json({ token });
     } catch (error) {
